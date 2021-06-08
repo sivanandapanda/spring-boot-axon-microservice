@@ -1,4 +1,4 @@
-package com.example.products.rest;
+package com.example.products.command.rest;
 
 import java.util.UUID;
 
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/products")
-public class ProductsController {
+public class ProductsCommandController {
     
     private final Environment env;
     private final CommandGateway commandGateway;
     
     @Autowired
-    public ProductsController(Environment env, CommandGateway commandGateway) {
+    public ProductsCommandController(Environment env, CommandGateway commandGateway) {
         this.env = env;
         this.commandGateway = commandGateway;
     }
@@ -48,12 +48,7 @@ public class ProductsController {
         return returnValue;
     }
 
-    @GetMapping
-    public String getProduct() {
-        return "Get Product " + env.getProperty("local.server.port");
-    }
-
-    @PutMapping
+    /* @PutMapping
     public String updateProduct() {
         return "Product Updated";
     }
@@ -61,5 +56,5 @@ public class ProductsController {
     @DeleteMapping
     public String deleteProduct() {
         return "Product Deleted";
-    }
+    } */
 }
