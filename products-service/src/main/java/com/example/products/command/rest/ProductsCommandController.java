@@ -1,19 +1,16 @@
 package com.example.products.command.rest;
 
-import java.util.UUID;
-
 import com.example.products.command.CreateProductCommand;
-
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -29,7 +26,7 @@ public class ProductsCommandController {
     }
 
     @PostMapping
-    public String createProduct(@RequestBody CreateProductRestModel productRestModel) {     
+    public String createProduct(@Valid @RequestBody CreateProductRestModel productRestModel) {
         CreateProductCommand createProductCommand = CreateProductCommand.builder()
         .price(productRestModel.getPrice())
         .quantity(productRestModel.getQuantity())
