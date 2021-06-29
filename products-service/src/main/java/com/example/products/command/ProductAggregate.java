@@ -31,7 +31,7 @@ public class ProductAggregate {
         }
 
         if(createProductCommand.getTitle() == null || createProductCommand.getTitle().isBlank()) {
-            throw new IllegalArgumentException("Product title can'bt be null");
+            throw new IllegalArgumentException("Product title can't be null");
         }
 
         ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
