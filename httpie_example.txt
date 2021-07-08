@@ -1,0 +1,2 @@
+http POST :8082/orders-service/orders productId=132978b0-777b-49dc-a4f4-3efd9c7ff974 addressId=afbb5881-a872-4d13-993c-faeb8350eea5 quantity=1
+http :8082/orders-service/orders | jq

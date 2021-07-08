@@ -1,4 +1,4 @@
-package com.example.products.query;
+package com.example.products.command;
 
 import com.example.products.core.data.ProductEntity;
 import com.example.products.core.data.ProductsRepository;
@@ -29,7 +29,7 @@ public class ProductEventsHandler {
             e.printStackTrace();
         }
 
-        throw new Exception("An error took place in @CommandHandler");
+        //throw new Exception("An error took place in @CommandHandler");
     }
 
     @ExceptionHandler(resultType = IllegalArgumentException.class)
