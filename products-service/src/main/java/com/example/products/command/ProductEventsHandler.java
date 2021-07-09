@@ -4,10 +4,11 @@ import com.example.core.events.ProductReservedEvent;
 import com.example.products.core.data.ProductEntity;
 import com.example.products.core.data.ProductsRepository;
 import com.example.products.core.events.ProductCreatedEvent;
-
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.messaging.interceptors.ExceptionHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,9 @@ public class ProductEventsHandler {
     
     @Autowired
     private ProductsRepository repository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductEventsHandler.class);
+
 
     @EventHandler
     public void on(ProductCreatedEvent event) throws Exception {
@@ -38,6 +42,8 @@ public class ProductEventsHandler {
         var productEntity = repository.findByProductId(event.getProductId());
         productEntity.setQuantity(productEntity.getQuantity() - event.getQuantity());
         repository.save(productEntity);
+
+        LOGGER.info("ProductReservedEvent for orderId {} and productId {}", event.getOrderId(), event.getProductId());
     }
 
     @ExceptionHandler(resultType = IllegalArgumentException.class)
