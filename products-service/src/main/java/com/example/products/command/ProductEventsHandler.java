@@ -1,5 +1,6 @@
 package com.example.products.command;
 
+import com.example.core.events.ProductReservedEvent;
 import com.example.products.core.data.ProductEntity;
 import com.example.products.core.data.ProductsRepository;
 import com.example.products.core.events.ProductCreatedEvent;
@@ -30,6 +31,13 @@ public class ProductEventsHandler {
         }
 
         //throw new Exception("An error took place in @CommandHandler");
+    }
+
+    @EventHandler
+    public void on(ProductReservedEvent event) throws Exception {
+        var productEntity = repository.findByProductId(event.getProductId());
+        productEntity.setQuantity(productEntity.getQuantity() - event.getQuantity());
+        repository.save(productEntity);
     }
 
     @ExceptionHandler(resultType = IllegalArgumentException.class)
